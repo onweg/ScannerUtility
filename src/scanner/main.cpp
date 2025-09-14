@@ -2,7 +2,7 @@
 #include "ScanUtility.h"
 
 int main() {
-    ScanUtility a(10, 20);
-    std::cout << a.StartScan();
+    ScanUtility a("" ,"", ".");
+    a.StartScan();
     return 0;
 }

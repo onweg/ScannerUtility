@@ -1,5 +1,10 @@
 #pragma once
 
+#include <iostream>
+#include <string>
+#include <map>
+#include <filesystem>
+
 #ifdef MYLIB_EXPORTS
     #define MYLIB __declspec(dllexport)
 #else
@@ -9,10 +14,16 @@
 class MYLIB ScanUtility
 {
 private:
-    int _a, _b;
+    std::string _basePath;
+    std::string _reportLogPath;
+    std::string _folderPath;
+
+    std::map<std::string, int> _fileToMD5;
+
+    void ScanFolder(const std::string& path);
 
 public:
-    ScanUtility(int a, int b);
+    ScanUtility(const std::string& basePath, const std::string& reportLogPath, const std::string& folderPath);
     ~ScanUtility();
-    int StartScan();
+    void StartScan();
 };
