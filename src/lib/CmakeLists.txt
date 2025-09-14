@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 4.1)
+
+project("lib")
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED on)
+
+add_library(lib SHARED ScanUtility.h ScanUtility.cpp)
+target_compile_definitions(lib PRIVATE MYLIB_EXPORTS)
+target_include_directories(lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
