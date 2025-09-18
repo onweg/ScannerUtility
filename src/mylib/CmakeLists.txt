@@ -1,0 +1,14 @@
+add_library(mylib ScanUtility.h ScanUtility.cpp)
+
+find_package(OpenSSL REQUIRED)
+
+target_include_directories(mylib PUBLIC
+    ${CMAKE_SOURCE_DIR}/libs/openssl/include
+)
+
+target_link_libraries(mylib PUBLIC 
+    OpenSSL::SSL
+)
+
+
+

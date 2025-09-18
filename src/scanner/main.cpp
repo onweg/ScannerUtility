@@ -2,7 +2,7 @@
 #include "ScanUtility.h"
 
 int main() {
-    ScanUtility a("" ,"", ".");
+    ScanUtility a("" ,"", "C:\\Users\\USER\\Desktop\\test");
     a.StartScan();
     return 0;
 }
