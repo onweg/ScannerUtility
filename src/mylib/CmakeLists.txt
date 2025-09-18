@@ -1,4 +1,4 @@
-add_library(mylib ScanUtility.h ScanUtility.cpp)
+add_library(mylib ScanUtility.h ScanUtility.cpp CLI11.hpp)
 
 find_package(OpenSSL REQUIRED)
 

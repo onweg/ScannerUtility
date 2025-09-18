@@ -1,8 +1,8 @@
 #include "ScanUtility.h"
 
-ScanUtility::ScanUtility(const std::string &basePath, const std::string &reportLogPath, const std::string &folderPath)
-:_basePath(basePath),_reportLogPath(reportLogPath), _folderPath(folderPath)
+ScanUtility::ScanUtility(const int argc, const char** argv)
 {
+    parseCommandLine(argc, argv);
 }
 
 ScanUtility::~ScanUtility()
@@ -10,7 +10,7 @@ ScanUtility::~ScanUtility()
 }
 
 void ScanUtility::StartScan() {
-    ScanFolder(_folderPath);
+    ScanFolder(m_pathToStartDir);
     for (const auto[key, value] : _fileToMD5) {
         std::cout << key << " ";
         for (const auto& c : value) {
@@ -58,4 +58,21 @@ int ScanUtility::getMd5HashFile(const std::string& path, std::vector<unsigned ch
         MD5_Final(hash.data(), &md5);
     }
     return result;
+}
+
+void parseCommandLine(const int argc, const char** argv) {
+    CLI::App app("Scanner");
+    std::string pathToBase, pathToLog, pathToStartDir;
+    app.add_option("--base", pathToBase, "Write your path to base")->required();
+    app.add_option("--log", pathToLog, "Write your path to logfile")->required();
+    app.add_option("--path", pathToStartDir, "Write your path to start dir")->required();
+
+    try {
+        app.parse(argc, argv);
+    } catch(const CLI::ParseError &e) {
+        std::cout << "Failed parse command line: " << app.exit(e);
+    }
+    m_pathToBase = pathToBase;
+    m_pathToLog = pathToLog;
+    m_pathToStartDir = pathToStartDir;
 }

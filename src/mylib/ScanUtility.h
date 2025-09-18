@@ -13,16 +13,17 @@
 class ScanUtility
 {
 private:
-    std::string _basePath;
-    std::string _reportLogPath;
-    std::string _folderPath;
+    std::string m_pathToBase;
+    std::string m_pathToLog;
+    std::string m_pathToStartDir;
 
     std::map<std::string, std::vector<unsigned char>> _fileToMD5;
 
     void ScanFolder(const std::string& path);
     int getMd5HashFile(const std::string& path, std::vector<unsigned char>& hash);
+    void parseCommandLine(const int argc, const char** argv);
 public:
-    ScanUtility(const std::string& basePath, const std::string& reportLogPath, const std::string& folderPath);
+    ScanUtility(const int argc, const char** argv);
     ~ScanUtility();
     void StartScan();
 };
