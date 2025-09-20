@@ -11,3 +11,9 @@ build\src\scanner\Debug\scanner.exe --base C:\Users\USER\Desktop\scanner\base.cs
 openssl
 paese comand line
 xslx reader
+
+Осталось 
+
+сделать проверку md5 хеша их таблицы
+завести логгер
+селать многопоточку
