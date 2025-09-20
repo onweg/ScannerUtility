@@ -1,8 +1,8 @@
 #include "ScanUtility.h"
 
-ScanUtility::ScanUtility(int argc, char** argv)
+ScanUtility::ScanUtility(const ParserCommandLine &parser)
+:m_parserCommandLine(parser)
 {
-    parseCommandLine(argc, argv);
 }
 
 ScanUtility::~ScanUtility()
@@ -10,8 +10,8 @@ ScanUtility::~ScanUtility()
 }
 
 void ScanUtility::StartScan() {
-    ScanFolder(m_pathToStartDir);
-    for (const auto[key, value] : _fileToMD5) {
+    ScanFolder(m_parserCommandLine.getPpathToStartDir());
+    for (const auto[key, value] : m_fileToMD5) {
         std::cout << key << "\t";
         for (const auto& c : value) {
             std::cout << c;
@@ -28,7 +28,7 @@ void ScanUtility::ScanFolder(const std::string& path) {
             // } else {
                 std::vector<unsigned char> hashTmp;
                 if (getMd5HashFile(entry.path().string(), hashTmp) == 0) {
-                    _fileToMD5[entry.path().string()] = hashTmp;
+                    m_fileToMD5[entry.path().string()] = hashTmp;
                 } else {
                     std::cout << "File undefined to path: " << entry.path().string() << "\n";
                 }
@@ -60,20 +60,22 @@ int ScanUtility::getMd5HashFile(const std::string& path, std::vector<unsigned ch
     return result;
 }
 
-void ScanUtility::parseCommandLine(int argc, char** argv) {
-    CLI::App app("Scanner");
-    std::string pathToBase, pathToLog, pathToStartDir;
-    app.add_option("--base", pathToBase, "Write your path to base")->required();
-    app.add_option("--log", pathToLog, "Write your path to logfile")->required();
-    app.add_option("--path", pathToStartDir, "Write your path to start dir")->required();
-
-    try {
-        app.parse(argc, argv);
-    } catch(const CLI::ParseError &e) {
-        std::cout << "Failed parse command line: " << app.exit(e);
+int ScanUtility::readCsvFiles(std::vector<std::vector<std::string> > &data) {
+    data.clear();
+    std::fstream file(m_parserCommandLine.getPathToBase());
+    if (!file.is_open()) {
+        std::cout << "Error opening file";
+        return 1;
     }
-
-    m_pathToBase = pathToBase;
-    m_pathToLog = pathToLog;
-    m_pathToStartDir = pathToStartDir;
+    std::string line;
+    while (getline(file, line)) {
+        data.push_back({});
+        std::stringstream ss(line);
+        std::string cell;
+        while (getline(ss, cell, ',')) {
+            data.push_back[row].push_back(cell);
+        }
+    }
+    file.close()
+    return 0;
 }

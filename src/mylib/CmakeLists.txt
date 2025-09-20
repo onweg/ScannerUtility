@@ -1,9 +1,17 @@
-add_library(mylib ScanUtility.h ScanUtility.cpp CLI11.hpp)
+add_library(mylib 
+    ScanUtility.h
+    ScanUtility.cpp 
+    ParserCommandLine.h
+    ParserCommandLine.h
+    CsvReader.h
+    CsvReader.cpp
+    )
 
 find_package(OpenSSL REQUIRED)
 
 target_include_directories(mylib PUBLIC
     ${CMAKE_SOURCE_DIR}/libs/openssl/include
+    ${CMAKE_SOURCE_DIR}/libs/CLI11/include
 )
 
 target_link_libraries(mylib PUBLIC 
