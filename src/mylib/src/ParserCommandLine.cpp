@@ -1,4 +1,4 @@
-#include "ParserCommandLine.h"
+#include "../include/ParserCommandLine.h"
 
 ParserCommandLine::ParserCommandLine()
 {
@@ -27,7 +27,7 @@ int ParserCommandLine::startParse(int argc, char **argv)
 
 std::string ParserCommandLine::getPathToBase()
 {
-    return m_pathToBase
+    return m_pathToBase;
 }
 
 std::string ParserCommandLine::getPathToLog()

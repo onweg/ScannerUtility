@@ -1,4 +1,4 @@
-#include "ScanUtility.h"
+#include "../include/ScanUtility.h"
 
 ScanUtility::ScanUtility(const ParserCommandLine &parser)
 :m_parserCommandLine(parser)
@@ -58,24 +58,4 @@ int ScanUtility::getMd5HashFile(const std::string& path, std::vector<unsigned ch
         MD5_Final(hash.data(), &md5);
     }
     return result;
-}
-
-int ScanUtility::readCsvFiles(std::vector<std::vector<std::string> > &data) {
-    data.clear();
-    std::fstream file(m_parserCommandLine.getPathToBase());
-    if (!file.is_open()) {
-        std::cout << "Error opening file";
-        return 1;
-    }
-    std::string line;
-    while (getline(file, line)) {
-        data.push_back({});
-        std::stringstream ss(line);
-        std::string cell;
-        while (getline(ss, cell, ',')) {
-            data.push_back[row].push_back(cell);
-        }
-    }
-    file.close()
-    return 0;
 }

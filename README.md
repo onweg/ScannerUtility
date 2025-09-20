@@ -5,7 +5,7 @@ cmake -S . -B build
 cmake --build build
 ```
 ```
-build\src\scanner\Debug\scanner.exe --base C:\Users\USER\Desktop\scanner\src\base.xslx --log C:\Users\USER\Desktop\scanner\src\base.xslx --path C:\Users\USER\Desktop\scanner\src
+build\src\scanner\Debug\scanner.exe --base C:\Users\USER\Desktop\scanner\base.csv --log C:\Users\USER\Desktop\scanner\log.log --path C:\Users\USER\Desktop\scanner\src
 ```
 
 openssl
