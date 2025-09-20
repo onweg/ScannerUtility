@@ -7,6 +7,7 @@
 #include <openssl/md5.h>
 #include <fstream>
 #include <vector>
+#include "CLI11.hpp"
 
 #define BUF_SIZE 4096
 
@@ -21,9 +22,9 @@ private:
 
     void ScanFolder(const std::string& path);
     int getMd5HashFile(const std::string& path, std::vector<unsigned char>& hash);
-    void parseCommandLine(const int argc, const char** argv);
+    void parseCommandLine(int argc, char** argv);
 public:
-    ScanUtility(const int argc, const char** argv);
+    ScanUtility(int argc, char** argv);
     ~ScanUtility();
     void StartScan();
 };

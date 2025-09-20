@@ -1,6 +1,6 @@
 #include "ScanUtility.h"
 
-ScanUtility::ScanUtility(const int argc, const char** argv)
+ScanUtility::ScanUtility(int argc, char** argv)
 {
     parseCommandLine(argc, argv);
 }
@@ -12,7 +12,7 @@ ScanUtility::~ScanUtility()
 void ScanUtility::StartScan() {
     ScanFolder(m_pathToStartDir);
     for (const auto[key, value] : _fileToMD5) {
-        std::cout << key << " ";
+        std::cout << key << "\t";
         for (const auto& c : value) {
             std::cout << c;
         }
@@ -60,7 +60,7 @@ int ScanUtility::getMd5HashFile(const std::string& path, std::vector<unsigned ch
     return result;
 }
 
-void parseCommandLine(const int argc, const char** argv) {
+void ScanUtility::parseCommandLine(int argc, char** argv) {
     CLI::App app("Scanner");
     std::string pathToBase, pathToLog, pathToStartDir;
     app.add_option("--base", pathToBase, "Write your path to base")->required();
@@ -72,6 +72,7 @@ void parseCommandLine(const int argc, const char** argv) {
     } catch(const CLI::ParseError &e) {
         std::cout << "Failed parse command line: " << app.exit(e);
     }
+
     m_pathToBase = pathToBase;
     m_pathToLog = pathToLog;
     m_pathToStartDir = pathToStartDir;
