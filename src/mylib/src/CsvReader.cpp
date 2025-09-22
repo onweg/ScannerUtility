@@ -27,7 +27,7 @@ int CsvReader::readCsv(const std::string &path)
     return 0;
 }
 
-std::vector<std::vector<std::string>> CsvReader::getData()
+std::vector<std::vector<std::string> > CsvReader::getData()
 {
     return m_data;
 }
